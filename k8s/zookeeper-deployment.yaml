@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper-deployment
+  labels:
+    name: zookeeper-deployment
+    app: devops-lamayai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: zookeeper-pod
+      app: devops-lamayai
+  template:
+    metadata:
+      name: zookeeper-pod
+      labels:
+        name: zookeeper-pod
+        app: devops-lamayai
+    spec:
+      containers:
+        - env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: "2181"
+          image: confluentinc/cp-zookeeper:latest
+          name: zookeeper
+          ports:
+            - containerPort: 2181
+              hostPort: 2181
+      hostname: zookeeper

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neo4j-deployment
+  labels:
+    name: neo4j-deployment
+    app: devops-lamayai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: neo4j-pod
+      app: devops-lamayai
+  template:
+    metadata:
+      name: neo4j-pod
+      labels:
+        name: neo4j-pod
+        app: devops-lamayai
+    spec:
+      containers:
+        - env:
+            - name: NEO4J_AUTH
+              value: neo4j/some_password
+          image: neo4j:4.2.3
+          name: neo4j
+          ports:
+            - containerPort: 7474
+              hostPort: 7474
+            - containerPort: 7687
+              hostPort: 7687
+      restartPolicy: Always

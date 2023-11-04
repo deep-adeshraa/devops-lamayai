@@ -6,7 +6,7 @@ import time, logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-KAFKA_BROKER = 'kafka:9092'
+KAFKA_BROKER = 'kafka-service:9092'
 TOPIC = 'test-topic'
 
 def main():
