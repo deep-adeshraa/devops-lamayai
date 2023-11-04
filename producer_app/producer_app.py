@@ -12,9 +12,10 @@ TOPIC = 'test-topic'
 def main():
     # Initialize Kafka producer
     while True:
-        logging.info("Connecting to Kafka, ES, neo4j...")
+        logging.info("Connecting to Kafka..")
         try:
             producer = KafkaProducer(bootstrap_servers=[KAFKA_BROKER])
+            logging.info("Connected to Kafka")
             break
         except NoBrokersAvailable as e:
             logging.error(f"No Broker error: {e}")
