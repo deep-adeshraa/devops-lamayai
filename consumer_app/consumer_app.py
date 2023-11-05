@@ -7,13 +7,13 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-KAFKA_BROKER = 'kafka-service:9092'
+KAFKA_BROKER = 'kafka:9092'
 ELASTICSEARCH_HOST = 'elasticsearch'
 ELASTICSEARCH_PORT = 9200
 ELASTICSEARCH_USERNAME = 'elastic'
 ELASTICSEARCH_PASS = 'changeme'
 
-NEO4J_HOST = 'bolt://neo4j-service:7687'
+NEO4J_HOST = 'bolt://neo4j:7687'
 NEO4J_USER = 'neo4j'
 NEO4J_PASSWORD = 'some_password'
 TOPIC = 'test-topic'

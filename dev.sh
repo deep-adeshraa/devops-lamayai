@@ -12,21 +12,29 @@ delete_all() {
 deploy_cluster() {
     echo "Deploying cluster"
     kubectl apply -f ./k8s/zookeeper-deployment.yaml
+    sleep 5
     kubectl apply -f ./k8s/zookeeper-service.yaml
+    sleep 5
     kubectl apply -f ./k8s/kafka-deployment.yaml
+    sleep 5
     kubectl apply -f ./k8s/kafka-service.yaml
+    sleep 5
     kubectl apply -f ./k8s/neo4j-deployment.yaml
+    sleep 5
     kubectl apply -f ./k8s/neo4j-service.yaml
+    sleep 5
     kubectl apply -f ./k8s/elasticsearch-deployment.yaml
+    sleep 5
     kubectl apply -f ./k8s/elasticsearch-service.yaml
+    sleep 5
     kubectl apply -f ./k8s/producer-app-deployment.yaml
 }
 
 
 build_local_images() {
     echo "Building local images"
-    docker build -t lamayai/producer-app:latest -f Dockerfile-producer .
-    docker build -t lamayai/consumer-app:latest -f Dockerfile-consumer .
+    docker build --no-cache -t lamayai/producer-app:latest -f Dockerfile-producer .
+    docker build --no-cache -t lamayai/consumer-app:latest -f Dockerfile-consumer .
 }
 
 if [ "$1" == "delete_all" ]; then
