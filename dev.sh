@@ -7,12 +7,26 @@ delete_all() {
     kubectl delete deployments --all
     echo "Deleting all services"
     kubectl delete services --all
+    echo "Deleting all configmaps"
+    kubectl delete configmaps --all
+    echo "Deleting all secrets"
+    kubectl delete secrets --all
 }
 
 deploy_cluster() {
-    echo "Deploying cluster"
+    echo "============= Deploying local cluster ============="
+
+    echo "Creating persistent volumes"
+    kubectl apply -f ./k8s/neo4j-persistent-volume.yaml
+    kubectl apply -f ./k8s/neo4j-persistent-volume-claim.yaml
+
+    echo "Creating configmaps"
     kubectl apply -f ./k8s/cluster_config.yaml
+
+    echo "Creating secrets"
     kubectl apply -f ./k8s/cluster_secrets.yaml
+
+    echo "Creating deployments and services"
     kubectl apply -f ./k8s/zookeeper-deployment.yaml
     sleep 5
     kubectl apply -f ./k8s/zookeeper-service.yaml
@@ -33,7 +47,6 @@ deploy_cluster() {
     sleep 5
     kubectl apply -f ./k8s/consumer-app-deployment.yaml
 }
-
 
 build_local_images() {
     echo "Building local images"

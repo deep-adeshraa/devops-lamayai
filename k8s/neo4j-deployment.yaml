@@ -18,6 +18,10 @@ spec:
         name: neo4j-pod
         app: devops-lamayai
     spec:
+      volumes:
+        - name: neo4j-pv
+          persistentVolumeClaim:
+            claimName: neo4j-pvc
       containers:
         - env:
             - name: NEO4J_AUTH
@@ -29,4 +33,7 @@ spec:
               hostPort: 7474
             - containerPort: 7687
               hostPort: 7687
+          volumeMounts:
+            - mountPath: /data
+              name: neo4j-pv
       restartPolicy: Always
