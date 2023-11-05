@@ -5,9 +5,10 @@ import time, logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+import os
 
-KAFKA_BROKER = 'kafka:9092'
-TOPIC = 'test-topic'
+KAFKA_BROKER = os.environ.get('KAFKA_BROKER')
+TOPIC = os.environ.get('KAFKA_TOPIC')
 
 def main():
     # Initialize Kafka producer

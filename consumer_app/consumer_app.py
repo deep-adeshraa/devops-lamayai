@@ -8,16 +8,17 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-KAFKA_BROKER = 'kafka:9092'
+KAFKA_BROKER = os.environ.get('KAFKA_BROKER')
 ELASTICSEARCH_HOST = 'elasticsearch'
 ELASTICSEARCH_PORT = 9200
 ELASTICSEARCH_USERNAME = os.environ.get('ELASTICSEARCH_USERNAME')
 ELASTICSEARCH_PASS = os.environ.get('ELASTICSEARCH_PASS')
 
-NEO4J_HOST = 'bolt://neo4j:7687'
+NEO4J_HOST = os.environ.get('NEO4J_HOST')
 NEO4J_USER = os.environ.get('NEO4J_USER')
 NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD')
-TOPIC = 'test-topic'
+
+TOPIC = os.environ.get('KAFKA_TOPIC')
 
 
 class Neo4jClient:
