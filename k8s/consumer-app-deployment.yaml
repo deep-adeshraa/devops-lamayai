@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-app-deployment
+  labels:
+    name: consumer-app-deployment
+    app: devops-lamayai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: consumer-app-pod
+      app: devops-lamayai
+  template:
+    metadata:
+      name: consumer-app-pod
+      labels:
+        name: consumer-app-pod
+        app: devops-lamayai
+    spec:
+      containers:
+        - image: lamayai/consumer-app:latest
+          name: consumer-app
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ELASTICSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: ELASTICSEARCH_USERNAME
+            - name: ELASTICSEARCH_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: ELASTICSEARCH_PASS
+            - name: NEO4J_USER
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: NEO4J_USER
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: NEO4J_PASSWORD
+      restartPolicy: Always

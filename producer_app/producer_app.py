@@ -5,16 +5,18 @@ import time, logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+import os
 
-KAFKA_BROKER = 'kafka:9092'
-TOPIC = 'test-topic'
+KAFKA_BROKER = os.environ.get('KAFKA_BROKER')
+TOPIC = os.environ.get('KAFKA_TOPIC')
 
 def main():
     # Initialize Kafka producer
     while True:
-        logging.info("Connecting to Kafka, ES, neo4j...")
+        logging.info("Connecting to Kafka..")
         try:
             producer = KafkaProducer(bootstrap_servers=[KAFKA_BROKER])
+            logging.info("Connected to Kafka")
             break
         except NoBrokersAvailable as e:
             logging.error(f"No Broker error: {e}")

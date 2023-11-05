@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    name: elasticsearch-deployment
+    app: devops-lamayai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: elasticsearch-pod
+      app: devops-lamayai
+  template:
+    metadata:
+      name: elasticsearch-pod
+      labels:
+        name: elasticsearch-pod
+        app: devops-lamayai
+    spec:
+      containers:
+        - env:
+            - name: bootstrap.memory_lock
+              value: "true"
+            - name: bootstrap.system_call_filter
+              value: "false"
+            - name: discovery.type
+              value: single-node
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+          name: elasticsearch
+          ports:
+            - containerPort: 9200
+              hostPort: 9200
+              protocol: TCP
+      restartPolicy: Always
+      hostname: elasticsearch

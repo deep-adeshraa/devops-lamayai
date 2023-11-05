@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-app-deployment
+  labels:
+    name: producer-app-deployment
+    app: devops-lamayai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: producer-app-pod
+      app: devops-lamayai
+  template:
+    metadata:
+      name: producer-app-pod
+      labels:
+        name: producer-app-pod
+        app: devops-lamayai
+    spec:
+      containers:
+        - image: lamayai/producer-app:latest
+          name: producer-app
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
