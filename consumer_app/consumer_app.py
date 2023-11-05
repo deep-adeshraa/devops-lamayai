@@ -3,6 +3,7 @@ from kafka import KafkaConsumer
 from elasticsearch import Elasticsearch
 from neo4j import GraphDatabase
 from datetime import datetime
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -10,12 +11,12 @@ logger = logging.getLogger(__name__)
 KAFKA_BROKER = 'kafka:9092'
 ELASTICSEARCH_HOST = 'elasticsearch'
 ELASTICSEARCH_PORT = 9200
-ELASTICSEARCH_USERNAME = 'elastic'
-ELASTICSEARCH_PASS = 'changeme'
+ELASTICSEARCH_USERNAME = os.environ.get('ELASTICSEARCH_USERNAME')
+ELASTICSEARCH_PASS = os.environ.get('ELASTICSEARCH_PASS')
 
 NEO4J_HOST = 'bolt://neo4j:7687'
-NEO4J_USER = 'neo4j'
-NEO4J_PASSWORD = 'some_password'
+NEO4J_USER = os.environ.get('NEO4J_USER')
+NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD')
 TOPIC = 'test-topic'
 
 

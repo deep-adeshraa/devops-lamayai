@@ -11,6 +11,7 @@ delete_all() {
 
 deploy_cluster() {
     echo "Deploying cluster"
+    kubectl apply -f ./k8s/cluster_secrets.yaml
     kubectl apply -f ./k8s/zookeeper-deployment.yaml
     sleep 5
     kubectl apply -f ./k8s/zookeeper-service.yaml

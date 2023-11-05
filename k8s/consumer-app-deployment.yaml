@@ -22,4 +22,25 @@ spec:
         - image: lamayai/consumer-app:latest
           name: consumer-app
           imagePullPolicy: IfNotPresent
+          env:
+            - name: ELASTICSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: ELASTICSEARCH_USERNAME
+            - name: ELASTICSEARCH_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: ELASTICSEARCH_PASS
+            - name: NEO4J_USER
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: NEO4J_USER
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lamayai-secrets
+                  key: NEO4J_PASSWORD
       restartPolicy: Always
