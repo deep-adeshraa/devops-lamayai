@@ -3,18 +3,23 @@ kind: Deployment
 metadata:
   name: consumer-app-deployment
   labels:
-    app: consumer-app
+    name: consumer-app-deployment
+    app: devops-lamayai
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumer-app
+      name: consumer-app-pod
+      app: devops-lamayai
   template:
     metadata:
+      name: consumer-app-pod
       labels:
-        app: consumer-app
+        name: consumer-app-pod
+        app: devops-lamayai
     spec:
       containers:
-      - name: consumer-app
-        image: consumer-app
+        - image: lamayai/consumer-app:latest
+          name: consumer-app
+          imagePullPolicy: IfNotPresent
       restartPolicy: Always

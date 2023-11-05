@@ -28,6 +28,8 @@ deploy_cluster() {
     kubectl apply -f ./k8s/elasticsearch-service.yaml
     sleep 5
     kubectl apply -f ./k8s/producer-app-deployment.yaml
+    sleep 5
+    kubectl apply -f ./k8s/consumer-app-deployment.yaml
 }
 
 
@@ -47,6 +49,6 @@ elif [ "$1" == "build_local_images" ]; then
     build_local_images
     exit 0
 else
-    echo "Usage: dev.sh [delete_all|deploy_cluster]"
+    echo "Usage: dev.sh [delete_all|deploy_cluster|build_local_images]"
     exit 1
 fi
